@@ -16,7 +16,6 @@
 	<!-- ================== END core-css ================== -->
 </head>
 <body>
-
 	<!-- BEGIN #app -->
 	<div id="app" class="app-without-sidebar">
 		<!-- BEGIN #content -->
@@ -35,7 +34,7 @@
 				</div>
 				
 				<div class="btn-task align-self-center">
-					<button class="btn btn-success rounded-pill d-flex" data-bs-toggle="modal" data-bs-target="#Modal"><i class='bx bx-plus p-1' style='color:#00218b'></i> Add Task</a>
+					<button class="btn btn-success rounded-pill d-flex" data-bs-toggle="modal" data-bs-target="#Modal" ><i class='bx bx-plus p-1' style='color:#00218b'></i> Add Task</a>
 				</div>
 			</div>
 			<!-- Modal -->
@@ -67,16 +66,17 @@
 								<label for="Priority" class="from-label fw-bold">Priority</label>
 								<select name="Priority" id="Priority" class="form-select" >
 									<option selected>Please select</option>
-									<option value=""></option>
-									<option value=""></option>
+									<option value="1">1</option>
+									<option value="2">2</option>
 								</select>
 							</div>
 							<div class="mb-3">
 								<label for="status" class="from-label fw-bold">Status</label>
 								<select name="status" id="status" class="form-select" >
 									<option selected>Please select</option>
-									<option value=""></option>
-									<option value=""></option>
+									<option value="todo">To do</option>
+									<option value="progress">In Progress</option>
+									<option value="done">Done</option>
 								</select>
 							</div>
 							<div class="mb-3">
@@ -91,7 +91,7 @@
 					</div>
 					<div class="modal-footer">
 					<button type="button" class="btn btn-secondary text-black" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save</button>
+					<button type="button" class="btn btn-primary" onclick="Ajouter()">Save</button>
 					</div>
 				</div>
 				</div>
@@ -102,19 +102,18 @@
 					<div class="p-2">
 						<div class="">
 							<h4 class="p-2 mb-0 bg-black text-light fs-6">To do (<span id="to-do-tasks-count">5</span>)</h4>
-
 						</div>
-						<div class="" id="to-do-tasks">
+						<div class="todo" id="to-do-tasks">
 							<!-- TO DO TASKS HERE -->
-							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex ">
+							<button class=" w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" id="btn">
 								<div class="fs-2">
 									<i class='bx bx-help-circle' style='color:#00d68a'></i> 
 								</div>
 								<div class="p-2 text-start">
-									<div class="fw-bold">Keep all the updated requirements in one place</div>
+									<div class="fw-bold" id="titre">Keep all the updated requirements in one place</div>
 									<div class="pt-1">
 										<div class=" text-secondary">#1 created in 2022-10-08</div>
-										<div class="" title="There is hardly anything more frustrating than having to look for current requirements in tens of comments under the actual description or having to decide which commenter is actually authorized to change the requirements. The goal here is to keep all the up-to-date requirements and details in the main/primary description of a task. Even though the information in comments may affect initial criteria, just update this primary description accordingly.">There is hardly anything more frustrating than having t...</div>
+										<div class="" title="">There is hardly anything more frustrating than having t...</div>
 									</div>
 									<div class="pt-1">
 										<span class="p-1 btn btn-primary border border-0">High</span>
@@ -122,7 +121,7 @@
 									</div>
 								</div>
 							</button>
-							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex">
+							<!-- <button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-help-circle' style='color:#00d68a'></i>  
 								</div>
@@ -142,7 +141,7 @@
 									</div>
 								</div>
 							</button>
-							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex">
+							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-help-circle' style='color:#00d68a'></i>  
 								</div>
@@ -150,7 +149,7 @@
 									<div class="fw-bold">Provide examples, credentials, etc</div>
 									<div class="pt-1">
 										<div class="text-secondary">#3 created in 2022-10-08</div>
-										<div class="" title="If the expectation is to process or generate some file — attach an example of such a file. If the goal is to integrate what is being developed with some service, ensure your devs have access to this service and its documentation. This list could go on and on — the bottom line is — if there is something that our developer might make use of, try to foresee it and provide them with (access to) it.">If the expectation is to process or generate some file ...</div>
+										<div class="" title="">If the expectation is to process or generate some file ...</div>
 									</div>
 									<div class="pt-1">
 										<span class="p-1 btn btn-primary border border-0">High</span>
@@ -158,7 +157,7 @@
 									</div>
 								</div>
 							</button>
-							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex">
+							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-help-circle' style='color:#00d68a'></i>  
 								</div>
@@ -166,7 +165,7 @@
 									<div class="fw-bold">Annotate</div>
 									<div class="pt-1">
 										<div class="text-secondary">#4 created in 2022-10-08</div>
-										<div class="" title="The mockup provided can sometimes be confusing for developers. Especially if it contains much more content than the scope of the task described. Drop a couple of arrows, outlines and annotations here and there to emphasize what are the important parts of the mockup from the task requirements perspective.">The mockup provided can sometimes be confusing for deve...</div>
+										<div class="" title="">The mockup provided can sometimes be confusing for deve...</div>
 									</div>
 									<div class="pt-1">
 										<span class="p-1 btn btn-primary border border-0">High</span>
@@ -174,7 +173,7 @@
 									</div>
 								</div>
 							</button>
-							<button class="w-100 bg-white border-0 rounded-bottom d-flex">
+							<button class="w-100 bg-white border-0 rounded-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-help-circle' style='color:#00d68a'></i>  
 								</div>
@@ -182,14 +181,14 @@
 									<div class="fw-bold">Use charts and diagrams</div>
 									<div class="pt-1">
 										<div class="text-secondary">#5 created in 2022-10-08</div>
-										<div class="" title="While it is not always necessary, sometimes it might be beneficial to prepare a flowchart, a block diagram or some other kind of concept visualization that will render it easy for the developer to comprehend the task and its scope.">While it is not always necessary, sometimes it might be...</div>
+										<div class="" title="">While it is not always necessary, sometimes it might be...</div>
 									</div>
 									<div class="pt-1">
 										<span class="p-1 btn btn-primary border border-0">High</span>
 										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Feature</span>
 									</div>
 								</div>
-							</button>
+							</button> -->
 						</div>
 					</div>
 				</div>
@@ -199,9 +198,9 @@
 							<h4 class="p-2 mb-0 bg-black text-light fs-6">In Progress (<span id="in-progress-tasks-count">4</span>)</h4>
 
 						</div>
-						<div class="" id="in-progress-tasks">
+						<div class="progres" id="in-progress-tasks">
 							<!-- IN PROGRESS TASKS HERE -->
-							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex">
+							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
 								</div>
@@ -217,7 +216,7 @@
 									</div>
 								</div>
 							</button>
-							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex">
+							<!-- <button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
 								</div>
@@ -233,7 +232,7 @@
 									</div>
 								</div>
 							</button>
-							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex">
+							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
 								</div>
@@ -249,7 +248,7 @@
 									</div>
 								</div>
 							</button>
-							<button class="w-100 bg-white bg-white border-0 rounded-bottom d-flex">
+							<button class="w-100 bg-white bg-white border-0 rounded-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-loader-alt' style='color:#00d68a'></i>  
 								</div>
@@ -264,7 +263,7 @@
 										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
 									</div>
 								</div>
-							</button>
+							</button> -->
 						</div>
 					</div>
 				</div>
@@ -274,9 +273,9 @@
 							<h4 class="p-2 mb-0 bg-black text-light fs-6">Done (<span id="done-tasks-count">4</span>)</h4>
 
 						</div>
-						<div class="" id="done-tasks">
+						<div class="done" id="done-tasks">
 							<!-- DONE TASKS HERE -->
-							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex">
+							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-check-circle' style='color:#00d68a'  ></i>
 								</div>
@@ -292,7 +291,7 @@
 									</div>
 								</div>
 							</button>
-							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex">
+							<!-- <button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-check-circle' style='color:#00d68a'  ></i> 
 								</div>
@@ -308,7 +307,7 @@
 									</div>
 								</div>
 							</button>
-							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex">
+							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-check-circle' style='color:#00d68a'  ></i> 
 								</div>
@@ -324,7 +323,7 @@
 									</div>
 								</div>
 							</button>
-							<button  class="w-100 bg-white bg-white border-0 rounded-bottom d-flex">
+							<button  class="w-100 bg-white bg-white border-0 rounded-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-check-circle' style='color:#00d68a'  ></i>
 								</div>
@@ -339,7 +338,7 @@
 										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
 									</div>
 								</div>
-							</button>
+							</button> -->
 						</div>
 					</div>
 				</div>
@@ -362,6 +361,7 @@
 	<!-- ================== BEGIN core-js ================== -->
 	<script src="assets/js/vendor.min.js"></script>
 	<script src="assets/js/app.min.js"></script>
+	<script src="assets/js/main.js"></script>
 	<!-- ================== END core-js ================== -->
 </body>
 </html>
