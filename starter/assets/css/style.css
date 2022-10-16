@@ -27,6 +27,13 @@ ol {
     background-color:rgb(236, 234, 234) ;
 }
 
+.text-truncate {
+    white-space: nowrap;
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 
 
 
