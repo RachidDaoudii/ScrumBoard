@@ -1,11 +1,16 @@
-var title = document.getElementById("title");
-var feature = document.getElementById("feature");
-var priority = document.getElementById("Priority");
-var Status = document.getElementById("status");
-var date = document.getElementById("date");
-var description = document.getElementById("description");
-var id=1;
-var button = document.getElementsByName("button");
+let id = 1;
+let title = document.getElementById("title");
+let feature = document.getElementById("feature");
+let bug = document.getElementById("bug");
+let priority = document.getElementById("Priority");
+let Status = document.getElementById("status");
+let date = document.getElementById("date");
+let description = document.getElementById("description");
+let submit = document.getElementById('submit');
+let mode = 'save';
+let index ;
+
+
 
 let data;
 if(localStorage.tasks !=null){
@@ -15,7 +20,7 @@ else{
     data = []
 }
 
-save();
+Afficher();
 function Ajouter(){
     let tasks = {
         id : id,
@@ -26,30 +31,42 @@ function Ajouter(){
         date : date.value,
         description : description.value
     };
-    data.push(tasks);
-    localStorage.setItem('tasks',    JSON.stringify(data)     );
-    clearinput();
-    save();
+    if(mode == 'save'){
+        data.push(tasks);
+        localStorage.setItem('tasks',    JSON.stringify(data)     );
+        clearinput();
+        Afficher();
+    }
+    else{
+        data[index] = tasks;
+        localStorage.setItem('tasks',    JSON.stringify(data)     );
+        clearinput();
+        submit.innerHTML = 'save';
+        mode = 'save';
+        Afficher();
+    }
+    
 }
 
 function clearinput(){
     title.value = '';
     feature.checked = true;
-    priority.value = 0;
-    Status.value = 0;
+    priority.value = 1 ;
+    Status.value = 1;
     date.value = 'jj/mm/aaaa';
     description.value = '';
 }
 
-function save(){
+function Afficher(){
     let todo ='';
     let progress ='';
     let done ='';
+    let btn ='';
 
     for(let i=0; i<data.length;i++){
         if(data[i].status == 'todo'){
             todo+= `
-            <button onclick="update()" id="${data[i].id}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex">
+            <button onclick="update(${i})" id="${i+1}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
                 <div class="fs-2">
                     <i class='bx bx-help-circle' style='color:#00d68a'></i> 
                 </div>
@@ -57,7 +74,7 @@ function save(){
                     <div class="fw-bold">${data[i].title}</div>
                     <div class="pt-1">
                         <div class="text-secondary">#${i+1} created in ${data[i].date}</div>
-                        <div class="text-truncate">${data[i].description}</div>
+                        <div class="" title="${data[i].description}">${data[i].description.slice(0,80)}...</div>
                     </div>
                     <div class="pt-1">
                         <span class="p-1 btn btn-primary border border-0">High</span>
@@ -69,7 +86,7 @@ function save(){
         }
         else if(data[i].status == 'progress'){
             progress += `
-            <button onclick="update()" id="${data[i].id}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex">
+            <button onclick="update(${i})" id="${i+1}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
                 <div class="fs-2">
                     <i class='bx bx-loader-alt' style='color:#00d68a'></i> 
                 </div>
@@ -77,7 +94,7 @@ function save(){
                     <div class="fw-bold">${data[i].title}</div>
                     <div class="pt-1">
                         <div class="text-secondary">#${i+1} created in ${data[i].date}</div>
-                        <div class="">${data[i].description}</div>
+                        <div class="" title="${data[i].description}">${data[i].description.slice(0,80)}...</div>
                     </div>
                     <div class="pt-1">
                         <span class="p-1 btn btn-primary border border-0">High</span>
@@ -89,7 +106,7 @@ function save(){
         }
         else if(data[i].status == 'done'){
             done += `
-            <button onclick="update()" id="${data[i].id}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" >
+            <button onclick="update(${i})" id="${i+1}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" >
                 <div class="fs-2">
                     <i class='bx bx-check-circle' style='color:#00d68a'  ></i>
                 </div>
@@ -97,7 +114,7 @@ function save(){
                     <div class="fw-bold">${data[i].title}</div>
                     <div class="pt-1">
                         <div class="text-secondary">#${i+1} created in ${data[i].date}</div>
-                        <div class="">${data[i].description}</div>
+                        <div class="" title="${data[i].description}">${data[i].description.slice(0,80)}...</div>
                     </div>
                     <div class="pt-1">
                         <span class="p-1 btn btn-primary border border-0">High</span>
@@ -106,17 +123,30 @@ function save(){
                 </div>
             </button>`;
             document.getElementById('done-tasks').innerHTML = done;
+            
         }
         data[i].id++;
     }  
 }
 
 
-function update(){
-
-    console.log(data.indexOf());
+function update(i){
+    title.value = data[i].title;
+    priority.value = data[i].priority;
+    Status.value = data[i].status;
+    date.value = data[i].date;
+    description.value = data[i].description;
+    submit.innerHTML = 'update';
+    mode = 'update'
+    index = i;
+    let sup = '';
+    sup +=`<button type="button" id="delete" class="btn btn-red d-none" >Delete</button>`;
+    document.createElement('modal-footer')= sup;
 }
 
-
+function supprimer(i){
+    let del = document.getElementById('delete');
+    console.log(i);
+}
 
 
