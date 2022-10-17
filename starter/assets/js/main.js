@@ -12,7 +12,6 @@ let _delete = document.getElementById('delete');
 let count_to = document.getElementById('to-do-tasks-count');
 let count_pro = document.getElementById('in-progress-tasks-count');
 let count_do = document.getElementById('done-tasks-count');
-
 let mode = 'save';
 let index ;
 
@@ -43,7 +42,6 @@ function Ajouter(){
         date : date.value,
         description : description.value
     };
-    
     //ajouter
     if(mode == 'save'){
         data.push(tasks);
@@ -73,6 +71,7 @@ function clearinput(){
     description.value = '';
 }
 
+
 //function Afficher les tasks
 function Afficher(){
     let todo ='';
@@ -85,7 +84,7 @@ function Afficher(){
     for(let i=0; i<data.length;i++){
         if(data[i].status == 'To Do'){
             todo+= `
-            <button onclick="update(${i})" id="${i+1}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+            <button onclick="update(${i})" id="btnn" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
                 <div class="fs-2">
                     <i class='bx bx-help-circle' style='color:#00d68a'></i> 
                 </div>
@@ -107,7 +106,7 @@ function Afficher(){
         }
         else if(data[i].status == 'In Progress'){
             progress += `
-            <button onclick="update(${i})" id="${i+1}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+            <button onclick="update(${i})" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
                 <div class="fs-2">
                     <i class='bx bx-loader-alt' style='color:#00d68a'></i> 
                 </div>
@@ -129,7 +128,7 @@ function Afficher(){
         }
         else if(data[i].status == 'Done'){
             done += `
-            <button onclick="update(${i})" id="${i+1}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" >
+            <button onclick="update(${i})" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" >
                 <div class="fs-2">
                     <i class='bx bx-check-circle' style='color:#00d68a'  ></i>
                 </div>
@@ -156,12 +155,7 @@ function Afficher(){
 //function Modifier 
 function update(i){
     title.value = data[i].title;
-    if(data[i].feature == 'Feature'){
-        document.getElementById('feature').checked = true;
-    }
-    else if(data[i].feature == 'Bug'){
-        document.getElementById('bug').checked = true;
-    }
+    feature.value = data[i].feature;
     priority.value = data[i].priority;
     Status.value = data[i].status;
     date.value = data[i].date;
@@ -179,8 +173,20 @@ function supprimer(i){
     // console.log(id);
     data.splice(i,1);
     localStorage.tasks = JSON.stringify(data);
-    clearinput();
-    Afficher();
 }
+
+// let sup = document.createElement("button");
+// sup.innerHTML = "Delete";
+// sup.className = "btn btn-red";
+// sup.type = "Button";
+// sup.id="delete"
+// sup.addEventListener("click", function supprimer(i) {
+//     data.splice(i,1);
+//     localStorage.tasks = JSON.stringify(data);
+// });
+// document.getElementById("modal-footer").appendChild(sup);
+
+
+
 
 
