@@ -54,18 +54,18 @@
 							<label for="type" class="from-label fw-bold">Type</label>
 							<div class="mb-3">
 								<div class="mb-1">
-									<input type="radio" checked class="form-check-input" name="type" id="feature">
+									<input type="radio" checked class="form-check-input" name="type" id="feature" value="1">
 									<label for="type" class="form-check-label">feature</label>
 								</div>
 								<div class="mb-1">
-									<input type="radio" class="form-check-input" name="type" id="bug">
+									<input type="radio" class="form-check-input" name="type" id="bug" value="2">
 									<label for="type" class="form-check-label">bug</label>
 								</div>
 							</div>
 							<div class="mb-3">
 								<label for="Priority" class="from-label fw-bold">Priority</label>
-								<select name="Priority" id="Priority" class="form-select" >
-									<option selected>Please select</option>
+								<select name="Priority" required id="Priority" class="form-select" >
+									<option disabled selected>Please select</option>
 									<option value="Low">Low</option>
 									<option value="Medium">Medium</option>
 									<option value="High">High</option>
@@ -74,11 +74,11 @@
 							</div>
 							<div class="mb-3">
 								<label for="status" class="from-label fw-bold">Status</label>
-								<select name="status" id="status" class="form-select" >
-									<option selected>Please select</option>
-									<option value="todo">To do</option>
-									<option value="progress">In Progress</option>
-									<option value="done">Done</option>
+								<select name="status" required id="status" class="form-select" >
+									<option value="" disabled selected>Please select</option>
+									<option value="To Do">To do</option>
+									<option value="In Progress">In Progress</option>
+									<option value="Done">Done</option>
 								</select>
 							</div>
 							<div class="mb-3">
@@ -92,8 +92,9 @@
 						</form>
 					</div>
 					<div class="modal-footer" id="modal-footer">
-					<button type="button" class="btn btn-secondary text-black" data-bs-dismiss="modal">Close</button>
-					<button type="button" id="submit" class="btn btn-primary" onclick="Ajouter()">Save</button>
+						<button type="button" class="btn btn-secondary text-black" data-bs-dismiss="modal">Close</button>
+						<button type="button" id="delete" onclick="supprimer(this);" class="btn btn-red" >Delete</button>
+						<button type="button" id="submit" class="btn btn-primary" onclick="Ajouter()">Save</button>
 					</div>
 				</div>
 				</div>
@@ -103,7 +104,7 @@
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="p-2">
 						<div class="">
-							<h4 class="p-2 mb-0 bg-black text-light fs-6">To do (<span id="to-do-tasks-count">5</span>)</h4>
+							<h4 class="p-2 mb-0 bg-black text-light fs-6">To do (<span id="to-do-tasks-count">0</span>)</h4>
 						</div>
 						<div class="todo" id="to-do-tasks">
 							<!-- TO DO TASKS HERE -->
@@ -197,7 +198,7 @@
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="p-2">
 						<div class="">
-							<h4 class="p-2 mb-0 bg-black text-light fs-6">In Progress (<span id="in-progress-tasks-count">4</span>)</h4>
+							<h4 class="p-2 mb-0 bg-black text-light fs-6">In Progress (<span id="in-progress-tasks-count">0</span>)</h4>
 
 						</div>
 						<div class="progres" id="in-progress-tasks">
@@ -272,7 +273,7 @@
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="p-2">
 						<div class="">
-							<h4 class="p-2 mb-0 bg-black text-light fs-6">Done (<span id="done-tasks-count">4</span>)</h4>
+							<h4 class="p-2 mb-0 bg-black text-light fs-6">Done (<span id="done-tasks-count">0</span>)</h4>
 
 						</div>
 						<div class="done" id="done-tasks">
@@ -363,6 +364,7 @@
 	<!-- ================== BEGIN core-js ================== -->
 	<script src="assets/js/vendor.min.js"></script>
 	<script src="assets/js/app.min.js"></script>
+	<script src="assets/js/data.js"></script>
 	<script src="assets/js/main.js"></script>
 	<!-- ================== END core-js ================== -->
 </body>
