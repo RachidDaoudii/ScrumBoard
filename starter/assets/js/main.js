@@ -17,21 +17,19 @@ let count_do = document.getElementById('done-tasks-count');
 
 let mode = 'save';
 let index ;
-var pointer;
+// var pointer;
 
 // load data 
-window.localStorage.setItem("tasks", JSON.stringify(data));
+// window.localStorage.setItem("tasks", JSON.stringify(data));
 
 //save in localStorage
-if(localStorage.tasks !=null){
-    data = JSON.parse(localStorage.tasks);
-}
-else{
-    data = []
-}
+// if(localStorage.tasks !=null){
+//     data = JSON.parse(localStorage.tasks);
+// }
+// else{
+//     data = []
+// }
 
-//Afficher tasks 
-Afficher();
 
 //hidden  button Delete
 _delete.style.display = 'none';
@@ -51,15 +49,25 @@ function Ajouter(){
     //ajouter un task
     if(mode == 'save'){
         data.push(tasks);
-        localStorage.setItem('tasks', JSON.stringify(data) );
+        // localStorage.setItem('tasks', JSON.stringify(data) );
         clearinput();
         Afficher();
     }
 
     //Modifier un task
     else{
-        data[index] = tasks;
-        localStorage.setItem('tasks', JSON.stringify(data));
+        for(let i=0;i<data.length;i++){
+            if(i==index){
+                data[i].title=title.value
+                data[i].feature=feature.value
+                data[i].priority=priority.value
+                data[i].status=Status.value
+                data[i].date=date.value
+                data[i].description=description.value
+            }
+        } 
+        // data[index] = tasks;
+        // localStorage.setItem('tasks', JSON.stringify(data));
         clearinput();
         submit.innerHTML = 'save';
         mode = 'save';
@@ -77,22 +85,22 @@ function clearinput(){
     description.value = '';
 }
 
+let todo = document.getElementById('to-do-tasks');
+let progress = document.getElementById('in-progress-tasks');
+let done = document.getElementById('done-tasks');
 //function Afficher les tasks
 function Afficher(){
-    let todo ='';
-    let progress ='';
-    let done ='';
+    todo.innerHTML ='';
+    progress.innerHTML ='';
+    done.innerHTML ='';
     // variable count
     let count_todo =0;
     let count_progress =0;
     let count_done =0;
     for(let i=0; i<data.length;i++){
-    // document.getElementById('to-do-tasks').innerHTML = ''
-    // document.getElementById('in-progress-tasks').innerHTML = ''
-    // ocument.getElementById('done-tasks').innerHTML= ''
-        if(data[i].status == 'To Do'){
-            todo+= `
-            <button onclick="update(${i});returnIndice(${i})" id="${i}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+        if(data[i].status === 'To Do'){
+            todo.innerHTML += `
+            <button onclick="update(${i})" id="${i}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
                 <div class="fs-2">
                     <i class='bx bx-help-circle' style='color:#00d68a'></i> 
                 </div>
@@ -108,13 +116,12 @@ function Afficher(){
                     </div>
                 </div>
             </button>`;
-            document.getElementById('to-do-tasks').innerHTML = todo;
             count_todo+=1;
             count_to.innerText= count_todo;
         }
-        else if(data[i].status == 'In Progress'){
-            progress += `
-            <button onclick="update(${i});returnIndice(${i})" id="${i}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+        else if(data[i].status === 'In Progress'){
+            progress.innerHTML += `
+            <button onclick="update(${i})" id="${i}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
                 <div class="fs-2">
                     <i class='bx bx-loader-alt' style='color:#00d68a'></i> 
                 </div>
@@ -130,13 +137,12 @@ function Afficher(){
                     </div>
                 </div>
             </button>`;
-            document.getElementById('in-progress-tasks').innerHTML = progress;
             count_progress+=1;
             count_pro.innerText=count_progress;
         }
-        else if(data[i].status == 'Done'){
-            done += `
-            <button onclick="update(${i});returnIndice(${i})" id="${i}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+        else if(data[i].status === 'Done'){
+            done.innerHTML += `
+            <button onclick="update(${i})" id="${i}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
                 <div class="fs-2">
                     <i class='bx bx-check-circle' style='color:#00d68a'  ></i>
                 </div>
@@ -153,15 +159,18 @@ function Afficher(){
                     </div>
                 </div>
             </button>`;
-            document.getElementById('done-tasks').innerHTML = done;
             count_done+=1;
             count_do.innerText=count_done;
         }
     }  
 }
 
+//Afficher tasks 
+Afficher();
+
 //function Modifier 
 function update(i){
+    index = i;
     title.value = data[i].title;
     feature.value = data[i].feature;
     priority.value = data[i].priority;
@@ -171,18 +180,31 @@ function update(i){
     submit.innerHTML = 'update';
     _delete.style.display = 'block';
     mode = 'update';
-    index = i;
     Afficher();
 }
 //return indice 
-function returnIndice(i){
-    pointer = i;
-    return pointer;
-}
-//function Delete
-_delete.addEventListener("click", function supprimer() {
-    data.splice(pointer,1);
-    localStorage.tasks = JSON.stringify(data);
+// function returnIndice(i){
+//     pointer = i;
+//     return pointer;
+// }
+// //function Delete
+// _delete.addEventListener("click", function supprimer() {
+//     data.splice(pointer,1);
+//     localStorage.tasks = JSON.stringify(data);
+//     Afficher();
+// });
+// document.getElementById("modal-footer").appendChild(_delete);
+function delete_task() {
+    // temp = [];
+    data.splice(index,1);
+    // localStorage.tasks = JSON.stringify(data);
     Afficher();
-});
-document.getElementById("modal-footer").appendChild(_delete);
+    // for(t of data){
+    //     if(t.id == task_id_to_update){
+    //         continue;
+    //     }else{
+    //         temp.push(t);
+    //     }
+    // }
+    
+}
