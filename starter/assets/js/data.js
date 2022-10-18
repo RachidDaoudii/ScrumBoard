@@ -38,46 +38,46 @@ var data = [
         'date'          :   '2022-10-08',
         'description'   :   `If the expectation is to process or generate some file — attach an example of such a file. If the goal is to integrate what is being developed with some service, ensure your devs have access to this service and its documentation. This list could go on and on — the bottom line is — if there is something that our developer might make use of, try to foresee it and provide them with (access to) it.`,
     },
-    {
-        'title'         :   'Annotate',
-        'type'          :   'Feature',
-        'priority'      :   'High',
-        'status'        :   'To Do',
-        'date'          :   '2022-10-08',
-        'description'   :   `The mockup provided can sometimes be confusing for developers. Especially if it contains much more content than the scope of the task described. Drop a couple of arrows, outlines and annotations here and there to emphasize what are the important parts of the mockup from the task requirements perspective.`,
-    },
-    {
-        'title'         :   'Use charts and diagrams',
-        'type'          :   'Feature',
-        'priority'      :   'High',
-        'status'        :   'To Do',
-        'date'          :   '2022-10-08',
-        'description'   :   `While it is not always necessary, sometimes it might be beneficial to prepare a flowchart, a block diagram or some other kind of concept visualization that will render it easy for the developer to comprehend the task and its scope.`,
-    },
-    {
-        'title'         :   'Spoil your developers with details',
-        'type'          :   'Feature',
-        'priority'      :   'High',
-        'status'        :   'To Do',
-        'date'          :   '2022-10-08',
-        'description'   :   `It is always safer to assume less rather than more domain knowledge in the dev team. Therefore following the KISS principle and augmenting each description or acceptance criteria list with contextual/domain knowledge and details that might become relevant is highly recommended.`,
-    },
-    {
-        'title'         :   'Describe edge cases and provide constraints',
-        'type'          :   'Feature',
-        'priority'      :   'High',
-        'status'        :   'In Progress',
-        'date'          :   '2022-10-08',
-        'description'   :   `Hardly any developer likes constraints, but if there are some, let them be communicated early. Do we need to support some specific browsers? Does this script need to run below a specific amount of time? Is it crucial for this endpoint to respond in no more than n milliseconds? If there are some such concerns, make sure they are included in your descriptions. Also describing any edge cases might be beneficial. Maybe we have some query limit on a given service? If you have such knowledge it is always beneficial for your devs to know about it upfront.`,
-    },
-    {
-        'title'         :   'Provide a copy',
-        'type'          :   'Feature',
-        'priority'      :   'High',
-        'status'        :   'In Progress',
-        'date'          :   '2022-10-08',
-        'description'   :   `If there is a long message to be displayed, just provide a copy for it somewhere in the description. Do not place it on mockups as it is always slower and more error-prone to re-type it than to copy-paste it.`,
-    },
+    // {
+    //     'title'         :   'Annotate',
+    //     'type'          :   'Feature',
+    //     'priority'      :   'High',
+    //     'status'        :   'To Do',
+    //     'date'          :   '2022-10-08',
+    //     'description'   :   `The mockup provided can sometimes be confusing for developers. Especially if it contains much more content than the scope of the task described. Drop a couple of arrows, outlines and annotations here and there to emphasize what are the important parts of the mockup from the task requirements perspective.`,
+    // },
+    // {
+    //     'title'         :   'Use charts and diagrams',
+    //     'type'          :   'Feature',
+    //     'priority'      :   'High',
+    //     'status'        :   'To Do',
+    //     'date'          :   '2022-10-08',
+    //     'description'   :   `While it is not always necessary, sometimes it might be beneficial to prepare a flowchart, a block diagram or some other kind of concept visualization that will render it easy for the developer to comprehend the task and its scope.`,
+    // },
+    // {
+    //     'title'         :   'Spoil your developers with details',
+    //     'type'          :   'Feature',
+    //     'priority'      :   'High',
+    //     'status'        :   'To Do',
+    //     'date'          :   '2022-10-08',
+    //     'description'   :   `It is always safer to assume less rather than more domain knowledge in the dev team. Therefore following the KISS principle and augmenting each description or acceptance criteria list with contextual/domain knowledge and details that might become relevant is highly recommended.`,
+    // },
+    // {
+    //     'title'         :   'Describe edge cases and provide constraints',
+    //     'type'          :   'Feature',
+    //     'priority'      :   'High',
+    //     'status'        :   'In Progress',
+    //     'date'          :   '2022-10-08',
+    //     'description'   :   `Hardly any developer likes constraints, but if there are some, let them be communicated early. Do we need to support some specific browsers? Does this script need to run below a specific amount of time? Is it crucial for this endpoint to respond in no more than n milliseconds? If there are some such concerns, make sure they are included in your descriptions. Also describing any edge cases might be beneficial. Maybe we have some query limit on a given service? If you have such knowledge it is always beneficial for your devs to know about it upfront.`,
+    // },
+    // {
+    //     'title'         :   'Provide a copy',
+    //     'type'          :   'Feature',
+    //     'priority'      :   'High',
+    //     'status'        :   'In Progress',
+    //     'date'          :   '2022-10-08',
+    //     'description'   :   `If there is a long message to be displayed, just provide a copy for it somewhere in the description. Do not place it on mockups as it is always slower and more error-prone to re-type it than to copy-paste it.`,
+    // },
     
     {
         'title'         :   'Describe steps to reproduce an issue',
@@ -144,3 +144,6 @@ var data = [
         'description'   :   `of the person that reported the bug. This will not always be possible, but in some cases it might be advantageous and most effective if a developer can have a chat with a person that actually experienced the bug, especially if the steps to reproduce a problem are not deterministic.`,
     },
 ];
+
+
+
