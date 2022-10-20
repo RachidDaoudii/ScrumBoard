@@ -1,4 +1,3 @@
-//variable global
 //variable des information
 let title = document.getElementById("title");
 let feature = document.getElementById("feature");
@@ -10,14 +9,20 @@ let description = document.getElementById("description");
 //variable button
 let submit = document.getElementById('submit');
 let _delete = document.getElementById('delete');
-//variable column
+//variable number tasks column
 let count_to = document.getElementById('to-do-tasks-count');
 let count_pro = document.getElementById('in-progress-tasks-count');
 let count_do = document.getElementById('done-tasks-count');
-
+//variable de column
+let todo = document.getElementById('to-do-tasks');
+let progress = document.getElementById('in-progress-tasks');
+let done = document.getElementById('done-tasks');
+//variable change bottun save - update
 let mode = 'save';
+//variable stocker valeur de button selectionner update delate
 let index ;
-// var pointer;
+//hidden  button Delete
+_delete.style.display = 'none';
 
 // load data 
 // window.localStorage.setItem("tasks", JSON.stringify(data));
@@ -30,16 +35,12 @@ let index ;
 //     data = []
 // }
 
-
-//hidden  button Delete
-_delete.style.display = 'none';
-
 //function Ajouter Task
 function Ajouter(){
     //create ob task
     let tasks = {
         title : title.value,
-        type : feature.checked? "feature" : "bug",
+        type : feature.checked? "Feature" : "Bug",
         priority : priority.value,
         status : Status.value,
         date : date.value,
@@ -56,17 +57,7 @@ function Ajouter(){
 
     //Modifier un task
     else{
-        for(let i=0;i<data.length;i++){
-            if(i==index){
-                data[i].title=title.value
-                data[i].feature=feature.value
-                data[i].priority=priority.value
-                data[i].status=Status.value
-                data[i].date=date.value
-                data[i].description=description.value
-            }
-        } 
-        // data[index] = tasks;
+        data[index] = tasks;
         // localStorage.setItem('tasks', JSON.stringify(data));
         clearinput();
         submit.innerHTML = 'save';
@@ -85,9 +76,6 @@ function clearinput(){
     description.value = '';
 }
 
-let todo = document.getElementById('to-do-tasks');
-let progress = document.getElementById('in-progress-tasks');
-let done = document.getElementById('done-tasks');
 //function Afficher les tasks
 function Afficher(){
     todo.innerHTML ='';
@@ -168,11 +156,22 @@ function Afficher(){
 //Afficher tasks 
 Afficher();
 
+
+//function RadioButton checked
+function checkradio(i){
+    if(data[i].type == 'Feature'){
+        feature.checked = true;
+
+    }else{
+        bug.checked = true;
+    }
+}
+
 //function Modifier 
 function update(i){
     index = i;
     title.value = data[i].title;
-    feature.value = data[i].feature;
+    checkradio(i)
     priority.value = data[i].priority;
     Status.value = data[i].status;
     date.value = data[i].date;
@@ -182,29 +181,10 @@ function update(i){
     mode = 'update';
     Afficher();
 }
-//return indice 
-// function returnIndice(i){
-//     pointer = i;
-//     return pointer;
-// }
-// //function Delete
-// _delete.addEventListener("click", function supprimer() {
-//     data.splice(pointer,1);
-//     localStorage.tasks = JSON.stringify(data);
-//     Afficher();
-// });
-// document.getElementById("modal-footer").appendChild(_delete);
+
+// function Delete 
 function delete_task() {
-    // temp = [];
     data.splice(index,1);
     // localStorage.tasks = JSON.stringify(data);
     Afficher();
-    // for(t of data){
-    //     if(t.id == task_id_to_update){
-    //         continue;
-    //     }else{
-    //         temp.push(t);
-    //     }
-    // }
-    
 }
