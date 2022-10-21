@@ -9,6 +9,7 @@ var data = [
         'status'        :   'To Do',
         'date'          :   '2022-10-08',
         'description'   :   `There is hardly anything more frustrating than having to look for current requirements in tens of comments under the actual description or having to decide which commenter is actually authorized to change the requirements. The goal here is to keep all the up-to-date requirements and details in the main/primary description of a task. Even though the information in comments may affect initial criteria, just update this primary description accordingly.`,
+    
     },
     {
         'title'         :   'Consider creating an acceptance criteria list',
@@ -21,6 +22,7 @@ var data = [
         b) Popup appears with two buttons: “This year” and “Last year”
         c) If user clicked on “Last year” download is initiated
         d) CSV downloaded includes following columns…`,
+    
     },
     {
         'title'         :   'Provide mockups',
@@ -37,6 +39,7 @@ var data = [
         'status'        :   'To Do',
         'date'          :   '2022-10-08',
         'description'   :   `If the expectation is to process or generate some file — attach an example of such a file. If the goal is to integrate what is being developed with some service, ensure your devs have access to this service and its documentation. This list could go on and on — the bottom line is — if there is something that our developer might make use of, try to foresee it and provide them with (access to) it.`,
+    
     },
     // {
     //     'title'         :   'Annotate',
@@ -86,6 +89,7 @@ var data = [
         'status'        :   'In Progress',
         'date'          :   '2022-10-08',
         'description'   :   `including as many details as possible.`,
+    
     },
     {
         'title'         :   'Provide access',
@@ -94,6 +98,7 @@ var data = [
         'status'        :   'In Progress',
         'date'          :   '2022-10-08',
         'description'   :   `to the affected account and services if possible. It might be hard to reproduce the exact environment on a local machine.`,
+    
     },
     {
         'title'         :   'Provide environment information',

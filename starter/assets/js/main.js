@@ -70,8 +70,8 @@ function Ajouter(){
 function clearinput(){
     title.value = '';
     feature.checked = true;
-    priority.value = 0;
-    Status.value = 0;
+    priority.selected = 0;
+    Status.selected = 0;
     date.value = 'jj/mm/aaaa';
     description.value = '';
 }
@@ -187,4 +187,10 @@ function delete_task() {
     data.splice(index,1);
     // localStorage.tasks = JSON.stringify(data);
     Afficher();
+}
+
+function add(){
+    _delete.style.display = 'none';
+    submit.innerHTML = 'Save';
+    clearinput()
 }

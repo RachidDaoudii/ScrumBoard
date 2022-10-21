@@ -34,7 +34,7 @@
 				</div>
 				
 				<div class="btn-task align-self-center">
-					<button class="btn btn-success rounded-pill d-flex" data-bs-toggle="modal" data-bs-target="#Modal" ><i class='bx bx-plus p-1' style='color:#00218b'></i> Add Task</a>
+					<button class="btn btn-success rounded-pill d-flex" id="Add" onclick="add()" data-bs-toggle="modal" data-bs-target="#Modal" ><i class='bx bx-plus p-1' style='color:#00218b'></i> Add Task</a>
 				</div>
 			</div>
 			<!-- Modal -->
@@ -65,7 +65,7 @@
 							<div class="mb-3">
 								<label for="Priority" class="from-label fw-bold">Priority</label>
 								<select name="Priority" required id="Priority" class="form-select" >
-									<option disabled selected>Please select</option>
+									<option selected value="">Please select</option>
 									<option value="Low">Low</option>
 									<option value="Medium">Medium</option>
 									<option value="High">High</option>
@@ -75,7 +75,7 @@
 							<div class="mb-3">
 								<label for="status" class="from-label fw-bold">Status</label>
 								<select name="status" required id="status" class="form-select" >
-									<option value="" disabled selected>Please select</option>
+									<option value="" selected>Please select</option>
 									<option value="To Do">To do</option>
 									<option value="In Progress">In Progress</option>
 									<option value="Done">Done</option>
