@@ -1,7 +1,7 @@
 //variable des information
-let title = document.getElementById("title");
 let feature = document.getElementById("feature");
 let bug = document.getElementById("bug");
+let title = document.getElementById("title");
 let priority = document.getElementById("Priority");
 let Status = document.getElementById("status");
 let date = document.getElementById("date");
@@ -24,16 +24,11 @@ let index ;
 //hidden  button Delete
 _delete.style.display = 'none';
 
-// load data 
-// window.localStorage.setItem("tasks", JSON.stringify(data));
-
-//save in localStorage
-// if(localStorage.tasks !=null){
-//     data = JSON.parse(localStorage.tasks);
-// }
-// else{
-//     data = []
-// }
+// variable count
+let count_todo =0;
+let count_progress =0;
+let count_done =0;
+let icons;
 
 //function Ajouter Task
 function Ajouter(){
@@ -50,18 +45,18 @@ function Ajouter(){
     //ajouter un task
     if(mode == 'save'){
         data.push(tasks);
-        // localStorage.setItem('tasks', JSON.stringify(data) );
         clearinput();
+        deleteTasks();
         Afficher();
     }
 
     //Modifier un task
     else{
         data[index] = tasks;
-        // localStorage.setItem('tasks', JSON.stringify(data));
         clearinput();
         submit.innerHTML = 'save';
         mode = 'save';
+        deleteTasks();
         Afficher();
     }
 }
@@ -78,84 +73,57 @@ function clearinput(){
 
 //function Afficher les tasks
 function Afficher(){
-    todo.innerHTML ='';
-    progress.innerHTML ='';
-    done.innerHTML ='';
-    // variable count
-    let count_todo =0;
-    let count_progress =0;
-    let count_done =0;
+    var table;
     for(let i=0; i<data.length;i++){
         if(data[i].status === 'To Do'){
-            todo.innerHTML += `
-            <button onclick="update(${i})" id="${i}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-                <div class="fs-2">
-                    <i class='bx bx-help-circle' style='color:#00d68a'></i> 
-                </div>
-                <div class="p-2 text-start">
-                    <div class="fw-bold">${data[i].title}</div>
-                    <div class="pt-1">
-                        <div class="text-secondary">#${i+1} created in ${data[i].date}</div>
-                        <div class="" title="${data[i].description}">${data[i].description.slice(0,80)}...</div>
-                    </div>
-                    <div class="pt-1">
-                        <span class="p-1 btn btn-primary border border-0">${data[i].priority}</span>
-                        <span class="p-1 btn btn-secondary btn-sm border border-0 text-black">${data[i].type}</span>
-                    </div>
-                </div>
-            </button>`;
-            count_todo+=1;
-            count_to.innerText= count_todo;
-        }
-        else if(data[i].status === 'In Progress'){
-            progress.innerHTML += `
-            <button onclick="update(${i})" id="${i}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-                <div class="fs-2">
-                    <i class='bx bx-loader-alt' style='color:#00d68a'></i> 
-                </div>
-                <div class="p-2 text-start">
-                    <div class="fw-bold">${data[i].title}</div>
-                    <div class="pt-1">
-                        <div class="text-secondary">#${i+1} created in ${data[i].date}</div>
-                        <div class="" title="${data[i].description}">${data[i].description.slice(0,80)}...</div>
-                    </div>
-                    <div class="pt-1">
-                        <span class="p-1 btn btn-primary border border-0">${data[i].priority}</span>
-                        <span class="p-1 btn btn-secondary btn-sm border border-0 text-black">${data[i].type}</span>
-                    </div>
-                </div>
-            </button>`;
+            icons = "bx-help-circle";
+            table = document.getElementById('to-do-tasks');
+            count_todo += 1;
+            count_to.innerText = count_todo;
+        }else if(data[i].status === 'In Progress'){
+            icons = "bx-loader-alt";
+            table = document.getElementById('in-progress-tasks');
             count_progress+=1;
             count_pro.innerText=count_progress;
-        }
-        else if(data[i].status === 'Done'){
-            done.innerHTML += `
-            <button onclick="update(${i})" id="${i}" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-                <div class="fs-2">
-                    <i class='bx bx-check-circle' style='color:#00d68a'  ></i>
-                </div>
-                <div class="p-2 text-start">
-                    <div class="fw-bold">${data[i].title}</div>
-                    <div class="pt-1">
-                        <div class="text-secondary">#${i+1} created in ${data[i].date}</div>
-                        <div class="" title="${data[i].description}">${data[i].description.slice(0,80)}...</div>
-                    </div>
-                    <div class="pt-1">
-                        <span class="p-1 btn btn-primary border border-0">${data[i].priority}</span>
-                        <span class="p-1 btn btn-secondary btn-sm border border-0 text-black">${data[i].type}</span>
-
-                    </div>
-                </div>
-            </button>`;
+        }else if(data[i].status === 'Done'){
+            table = document.getElementById('done-tasks');
+            icons = "bx-check-circle";
             count_done+=1;
             count_do.innerText=count_done;
         }
-    }  
+        table.innerHTML += `
+        <button onclick="update(${i})" id="${i}" class="task w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+            <div class="fs-2">
+                <i class='bx ${icons}' style='color:#00d68a'></i> 
+            </div>
+            <div class="p-2 text-start">
+                <div class="fw-bold">${data[i].title}</div>
+                <div class="pt-1">
+                    <div class="text-secondary">#${i+1} created in ${data[i].date}</div>
+                    <div class="" title="${data[i].description}">${data[i].description.slice(0,80)}...</div>
+                </div>
+                <div class="pt-1">
+                    <span class="p-1 btn btn-primary border border-0">${data[i].priority}</span>
+                    <span class="p-1 btn btn-secondary btn-sm border border-0 text-black">${data[i].type}</span>
+                </div>
+            </div>
+        </button>`;
+    }
+}
+
+function deleteTasks(){
+    document.getElementById('to-do-tasks').innerHTML = "";
+    document.getElementById('in-progress-tasks').innerHTML = "";
+    document.getElementById('done-tasks').innerHTML = "";
+
+    count_todo = count_progress = count_done = 0;
+    count_to.innerText = count_todo;
+    count_pro.innerText=count_progress;
+    count_do.innerText=count_done;
 }
 
 //Afficher tasks 
 Afficher();
-
 
 //function RadioButton checked
 function checkradio(i){
@@ -179,13 +147,12 @@ function update(i){
     submit.innerHTML = 'update';
     _delete.style.display = 'block';
     mode = 'update';
-    Afficher();
 }
 
 // function Delete 
 function delete_task() {
     data.splice(index,1);
-    // localStorage.tasks = JSON.stringify(data);
+    deleteTasks();
     Afficher();
 }
 
